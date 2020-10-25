@@ -18,15 +18,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="principalApp.PrincipalController">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="principalApp.Avaliacao2Controller">
    <center>
       <HBox BorderPane.alignment="CENTER">
          <children>
             <ScrollPane fx:id="audioOri" hbarPolicy="ALWAYS" maxHeight="500.0" maxWidth="500.0" prefHeight="400.0" prefWidth="300.0" vbarPolicy="ALWAYS">
                <content>
-                  <AnchorPane />
+                  <AnchorPane>
+                     <children>
+                        <MediaView fx:id="originalAudio" fitHeight="200.0" fitWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children></AnchorPane>
                </content>
                <HBox.margin>
                   <Insets bottom="5.0" right="5.0" top="5.0" />
@@ -40,12 +44,13 @@
         <menus>
           <Menu mnemonicParsing="false" text="Arquivo">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#selecionaImagem" text="Selecionar audio" />
+              <MenuItem mnemonicParsing="false" onAction="#selecionaAudio" text="Selecionar audio" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Ações">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#classificarImagem" text="Classificar" />
+              <MenuItem mnemonicParsing="false" onAction="#classificarImagem" text="Executar classificação" />
+                  <MenuItem mnemonicParsing="false" onAction="#executaJ48" text="Executar J48" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Extração">

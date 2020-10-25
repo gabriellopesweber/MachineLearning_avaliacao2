@@ -1,21 +1,20 @@
 package extrairCaracteristicas;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
-import org.opencv.imgcodecs.Imgcodecs;
+//import org.opencv.core.Mat;
+//import org.opencv.core.MatOfByte;
+//import org.opencv.imgcodecs.Imgcodecs;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 
 public class ExtractCaracteristicas {
 
-	public static double[] extraiCaracteristicas(File f, ImageView ivO, ImageView ivP) {
+	public static double[] extraiCaracteristicas(File f, MediaView mvO) {
 
 		double[] caracteristicas = new double[5];
 
@@ -25,11 +24,11 @@ public class ExtractCaracteristicas {
 		double aBarbaGrampa = 0;
 
 		Image img = new Image(f.toURI().toString());
-		Image imgPro = img;
+//		Image imgPro = img;
 		PixelReader pr = img.getPixelReader();
 
-		Mat imagemOriginal = Imgcodecs.imread(f.getPath());
-		Mat imagemProcessada = imagemOriginal.clone();
+//		Mat imagemOriginal = Imgcodecs.imread(f.getPath());
+//		Mat imagemProcessada = imagemOriginal.clone();
 
 		int w = (int) img.getWidth();
 		int h = (int) img.getHeight();
@@ -45,19 +44,19 @@ public class ExtractCaracteristicas {
 
 				if (i < (h / 2) && isPretoFardaChief(r, g, b)) {
 					pretoFardaChief++;
-					imagemProcessada.put(i, j, new double[] { 0, 255, 128 });
+//					imagemProcessada.put(i, j, new double[] { 0, 255, 128 });
 				}
 				if (isAzulFardaClaroChief(r, g, b) || isAzulFardaEscuroChief(r, g, b)) {
 					azulFardaChief++;
-					imagemProcessada.put(i, j, new double[] { 0, 255, 128 });
+//					imagemProcessada.put(i, j, new double[] { 0, 255, 128 });
 				}
 				if (isCamizaGrampa(r, g, b)) {
 					aCamizaGrampa++;
-					imagemProcessada.put(i, j, new double[] { 0, 255, 255 });
+//					imagemProcessada.put(i, j, new double[] { 0, 255, 255 });
 				}
 				if (isBarbaGrampa(r, g, b)) {
 					aBarbaGrampa++;
-					imagemProcessada.put(i, j, new double[] { 0, 255, 255 });
+//					imagemProcessada.put(i, j, new double[] { 0, 255, 255 });
 				}
 			}
 		}
@@ -76,13 +75,11 @@ public class ExtractCaracteristicas {
 		// APRENDIZADO SUPERVISIONADO - JÁ SABE QUAL A CLASSE NAS IMAGENS DE TREINAMENTO
 		caracteristicas[4] = f.getName().charAt(0) == 'c' ? 0 : 1;
 
-		imgPro = mat2Image(imagemProcessada);
-		ivP.setImage(imgPro);
-		ivP.setFitHeight(imgPro.getHeight());
-		ivP.setFitWidth(imgPro.getWidth());
-		ivO.setImage(img);
-		ivO.setFitHeight(img.getHeight());
-		ivO.setFitWidth(img.getWidth());
+//		imgPro = mat2Image(imagemProcessada);
+//		mvO.setImage(imgPro);
+//		mvO.setFitHeight(imgPro.getHeight());
+//		mvO.setFitWidth(imgPro.getWidth());
+		
 
 		return caracteristicas;
 	}
@@ -122,7 +119,7 @@ public class ExtractCaracteristicas {
 		return false;
 	}
 
-	public static void extrair(ImageView viO, ImageView viP) {
+	public static void extrair(MediaView mvO) {
 		
 		// Cabeçalho do arquivo Weka
 		String exportacao = "@relation caracteristicas\n\n";
@@ -145,7 +142,7 @@ public class ExtractCaracteristicas {
 			int cont = -1;
 			for (File imagem : arquivos) {
 				cont++;
-				caracteristicas[cont] = extraiCaracteristicas(imagem, viO, viP);
+				caracteristicas[cont] = extraiCaracteristicas(imagem, mvO);
 
 				String classe = caracteristicas[cont][4] == 0 ? "Chief" : "Grampa";
 
@@ -170,14 +167,4 @@ public class ExtractCaracteristicas {
 		}
 
 	}
-
-	public static Image mat2Image(Mat frame) {
-		MatOfByte buffer;
-
-		buffer = new MatOfByte();
-		Imgcodecs.imencode(".jpg", frame, buffer);
-
-		return new Image(new ByteArrayInputStream(buffer.toArray()));
-	}
-
 }

@@ -5,20 +5,19 @@ import java.text.DecimalFormat;
 
 import javax.swing.JOptionPane;
 
-import utils.Classificacao_caracteristicas;
 import extrairCaracteristicas.ExtractCaracteristicas;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
+import utils.Classificacao_caracteristicas;
 
-public class PrincipalController {
+public class Avaliacao2Controller {
 
 	@FXML
-	private ImageView imageOri;
-	@FXML
-	private ImageView imagePro;
+	private MediaView originalAudio;
 
 	@FXML
 	private Label resultado_PretoFardaChief;
@@ -45,19 +44,19 @@ public class PrincipalController {
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options_JO, options_JO[0]);
 
 		if (optionSelecionada == 1) {
-			ExtractCaracteristicas.extrair(imageOri, imagePro);
+			ExtractCaracteristicas.extrair(originalAudio);
 		}
 	}
 
 	@FXML
-	public void selecionaImagem() {
+	public void selecionaAudio() {
 		f = buscaImg();
 		if (f != null) {
 			Image img = new Image(f.toURI().toString());
-			getImageOri().setImage(img);
-			getImageOri().setFitWidth(img.getWidth());
-			getImageOri().setFitHeight(img.getHeight());
-			caracteristicasExtraidas = ExtractCaracteristicas.extraiCaracteristicas(f, imageOri, imagePro);
+//			getOriginalAudio().setImage(img);
+//			getOriginalAudio().setFitWidth(img.getWidth());
+//			getOriginalAudio().setFitHeight(img.getHeight());
+			caracteristicasExtraidas = ExtractCaracteristicas.extraiCaracteristicas(f, originalAudio);
 			resultado_PretoFardaChief.setText(formatador.format(caracteristicasExtraidas[0]));
 			resultado_AzulFardaChief.setText(formatador.format(caracteristicasExtraidas[1]));
 			resultado_Barba_Grampa.setText(formatador.format(caracteristicasExtraidas[2]));
@@ -79,6 +78,11 @@ public class PrincipalController {
 			classificaGrampa.setText(formatador.format(caracPor[1]) + "%");
 		}
 	}
+	
+	@FXML
+	public void executaJ48() {
+		
+	}
 
 	private File buscaImg() {
 		FileChooser fileChooser = new FileChooser();
@@ -96,15 +100,11 @@ public class PrincipalController {
 		return null;
 	}
 
-	public ImageView getImageOri() {
-		return imageOri;
+	public MediaView getOriginalAudio() {
+		return originalAudio;
 	}
 
-	public ImageView getImagePro() {
-		return imagePro;
-	}
-
-	public void setImagePro(ImageView imagePro) {
-		this.imagePro = imagePro;
+	public void setOriginalAudio(MediaView originalAudio) {
+		this.originalAudio = originalAudio;
 	}
 }
