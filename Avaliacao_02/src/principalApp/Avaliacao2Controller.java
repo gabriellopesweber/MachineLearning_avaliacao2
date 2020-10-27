@@ -10,6 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import utils.Classificacao_caracteristicas;
@@ -52,8 +55,9 @@ public class Avaliacao2Controller {
 	public void selecionaAudio() {
 		f = buscaImg();
 		if (f != null) {
-			Image img = new Image(f.toURI().toString());
-//			getOriginalAudio().setImage(img);
+			Media arquivoAudio = new Media(f.toURI().toString());
+			MediaPlayer MPaudio = new MediaPlayer(arquivoAudio);
+			getOriginalAudio().setMediaPlayer(MPaudio);
 //			getOriginalAudio().setFitWidth(img.getWidth());
 //			getOriginalAudio().setFitHeight(img.getHeight());
 			caracteristicasExtraidas = ExtractCaracteristicas.extraiCaracteristicas(f, originalAudio);
