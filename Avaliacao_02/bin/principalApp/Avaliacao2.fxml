@@ -6,11 +6,9 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -21,7 +19,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="principalApp.Avaliacao2Controller">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="principalApp.Avaliacao2Controller">
    <center>
       <HBox BorderPane.alignment="CENTER">
          <children>
@@ -47,17 +45,6 @@
               <MenuItem mnemonicParsing="false" onAction="#selecionaAudio" text="Selecionar audio" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Ações">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#classificarImagem" text="Executar classificação" />
-                  <MenuItem mnemonicParsing="false" onAction="#executaJ48" text="Executar J48" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Extração">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#extrairCaracteristicas" text="Ensinar Base" />
-            </items>
-          </Menu>
         </menus>
       </MenuBar>
    </top>
@@ -74,146 +61,8 @@
             </Label>
             <HBox>
                <children>
-                  <VBox>
+                  <VBox prefWidth="140.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <TitledPane animated="false" text="Caracteristicas da imagem">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0">
-                                 <children>
-                                    <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <columnConstraints>
-                                        <ColumnConstraints prefWidth="70.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" prefWidth="50.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" prefWidth="70.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" prefWidth="50.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                       <children>
-                                          <Label text="Farda Preto" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                             <padding>
-                                                <Insets right="5.0" />
-                                             </padding>
-                                             <GridPane.margin>
-                                                <Insets />
-                                             </GridPane.margin>
-                                          </Label>
-                                          <Label text="Farda Azul" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                             <padding>
-                                                <Insets right="5.0" />
-                                             </padding>
-                                             <GridPane.margin>
-                                                <Insets />
-                                             </GridPane.margin>
-                                          </Label>
-                                          <Label text="Detalhes Chief" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="resultado_AzulFardaChief" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label fx:id="resultado_PretoFardaChief" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <Label text="Barba" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                             <padding>
-                                                <Insets right="5.0" />
-                                             </padding>
-                                             <GridPane.margin>
-                                                <Insets />
-                                             </GridPane.margin>
-                                          </Label>
-                                          <Label text="Camisa" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                             <padding>
-                                                <Insets right="5.0" />
-                                             </padding>
-                                             <GridPane.margin>
-                                                <Insets />
-                                             </GridPane.margin>
-                                          </Label>
-                                          <Label text="Detalhes Grampa" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="resultado_Barba_Grampa" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                          <Label fx:id="resultado_Camisa_Grampa" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                       </children>
-                                    </GridPane>
-                                 </children>
-                              </AnchorPane>
-                          </content>
-                        </TitledPane>
-                        <TitledPane animated="false" text="Classificação da imagem">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0">
-                                 <children>
-                                    <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <columnConstraints>
-                                        <ColumnConstraints prefWidth="50.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                        <RowConstraints prefHeight="30.0" />
-                                        <RowConstraints prefHeight="30.0" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                       <children>
-                                          <Label text="Resultado" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Chief" GridPane.rowIndex="1" />
-                                          <Label text="Grampa" GridPane.rowIndex="2" />
-                                          <Label fx:id="classificaChief" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label fx:id="classificaGrampa" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                       </children>
-                                    </GridPane>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                           <padding>
-                              <Insets top="5.0" />
-                           </padding>
-                        </TitledPane>
-                     </children>
-                     <HBox.margin>
-                        <Insets bottom="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefWidth="260.0">
-                     <children>
-                        <TitledPane animated="false" text="J48">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" scaleShape="false">
-                                 <children>
-                                    <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints prefWidth="50.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints prefHeight="30.0" />
-                                          <RowConstraints prefHeight="30.0" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label text="Resultado" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Chief" GridPane.rowIndex="1" />
-                                          <Label text="Grampa" GridPane.rowIndex="2" />
-                                          <Label fx:id="J48Chief" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label fx:id="J48Grampa" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                       </children>
-                                    </GridPane>
-                                 </children></AnchorPane>
-                           </content>
-                        </TitledPane>
                         <TitledPane animated="false" text="MultilayerPerceptron">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" scaleShape="false">
@@ -234,10 +83,10 @@
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Chief" GridPane.rowIndex="1" />
-                                          <Label text="Grampa" GridPane.rowIndex="2" />
-                                          <Label fx:id="MPChief" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label fx:id="MPGrampa" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label text="Cat" GridPane.rowIndex="1" />
+                                          <Label text="Dog" GridPane.rowIndex="2" />
+                                          <Label fx:id="classificaCat" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label fx:id="classificaDog" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                        </children>
                                     </GridPane>
                                  </children>
@@ -269,45 +118,38 @@
                               <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints prefHeight="30.0" />
-                              <RowConstraints prefHeight="30.0" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label text="Opções para teste" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                              <Label text="GenericObjectEditor" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label text="GenericObjectEditor" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <HBox alignment="CENTER_LEFT" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                              <HBox alignment="CENTER_LEFT" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                  <children>
                                     <Label text="Tempo de treinamento" textAlignment="CENTER">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField prefWidth="50.0">
+                                    <TextField fx:id="txtTempoTreinamento" prefWidth="50.0">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                     </TextField>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                              <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                  <children>
                                     <Label text="Taxa de Aprendizagem" textAlignment="CENTER">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField prefWidth="50.0">
+                                    <TextField fx:id="txtTaxaAprendizagem" prefWidth="50.0">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
@@ -317,25 +159,9 @@
                                     <Insets left="-85.0" />
                                  </GridPane.margin>
                               </HBox>
-                              <RadioButton mnemonicParsing="false" text="Use Training set" GridPane.rowIndex="1">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="optionMP" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton mnemonicParsing="false" selected="true" text="Cross-Validation" toggleGroup="$optionMP" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <HBox alignment="CENTER_LEFT" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                              <HBox alignment="CENTER_LEFT" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Executar configuração" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                 <children>
-                                    <Label text="Folds" />
-                                    <TextField prefWidth="50.0">
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </TextField>
+                                    <Button mnemonicParsing="false" onAction="#executaConfiguracao" text="Executar configuração" />
                                  </children>
                               </HBox>
                            </children>
