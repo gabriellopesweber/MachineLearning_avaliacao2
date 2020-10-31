@@ -4,6 +4,10 @@ import java.io.File;
 import java.text.DecimalFormat;
 
 import extrairCaracteristicas.ExtractCaracteristicas;
+import jAudio.jAudioFE;
+import jAudioFeatureExtractor.AudioFeatures.LPC;
+import jAudioFeatureExtractor.AudioFeatures.SpectralCentroid;
+import jAudioFeatureExtractor.actions.AddRecordingAction;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -40,12 +44,33 @@ public class Avaliacao2Controller {
 		if (f != null) {
 			MultilayerPerceptron mp = new MultilayerPerceptron();
 			mp.setTrainingTime(Integer.parseInt(txtTempoTreinamento.getText()));
-			mp.setLearningRate(Integer.parseInt(txtTaxaAprendizagem.getText()));
+			mp.setLearningRate(Double.parseDouble(txtTaxaAprendizagem.getText()));
 
 			System.out.println("TT -> " + mp.getTrainingTime());
 			System.out.println("LR -> " + mp.getLearningRate());
 			
+			File[] files = new File[3];
 			
+			files[0] = f;
+			files[1] = f;
+			files[2] = f;
+			
+			AddRecordingAction addAudio = new AddRecordingAction();
+			try {
+				SpectralCentroid sc = new SpectralCentroid();
+
+				addAudio.putValue("0", f.toURI().toString());
+				addAudio.putValue("1", f.toURI().toString());
+				addAudio.putValue("2", f.toURI().toString());
+
+				System.out.println(addAudio.getPropertyChangeListeners());
+				
+				
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -62,7 +87,7 @@ public class Avaliacao2Controller {
 
 			caracteristicasExtraidas = ExtractCaracteristicas.extraiCaracteristicas(f, originalAudio);
 
-			MPaudio.play();
+			//MPaudio.play();
 		}
 	}
 
