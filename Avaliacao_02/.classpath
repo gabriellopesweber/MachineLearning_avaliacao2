@@ -12,7 +12,18 @@
 	<classpathentry kind="lib" path="lib/junit-4.12.jar"/>
 	<classpathentry kind="lib" path="lib/mp3plugin.jar"/>
 	<classpathentry kind="lib" path="lib/xerces.jar"/>
-	<classpathentry kind="lib" path="lib/jAudio.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
+	<classpathentry kind="lib" path="lib/jAudio.jar">
+		<attributes>
+			<attribute name="source_encoding" value="UTF-8"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/FX/javafx.base.jar"/>
+	<classpathentry kind="lib" path="lib/FX/javafx.controls.jar"/>
+	<classpathentry kind="lib" path="lib/FX/javafx.fxml.jar"/>
+	<classpathentry kind="lib" path="lib/FX/javafx.graphics.jar"/>
+	<classpathentry kind="lib" path="lib/FX/javafx.media.jar"/>
+	<classpathentry kind="lib" path="lib/FX/javafx.swing.jar"/>
+	<classpathentry kind="lib" path="lib/FX/javafx.web.jar"/>
+	<classpathentry kind="lib" path="lib/FX/javafx-swt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

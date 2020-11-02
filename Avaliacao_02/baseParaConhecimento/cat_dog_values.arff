@@ -77,7 +77,6 @@
 @ATTRIBUTE "Method of Moments Overall Average2" NUMERIC
 @ATTRIBUTE "Method of Moments Overall Average3" NUMERIC
 @ATTRIBUTE "Method of Moments Overall Average4" NUMERIC
-
 @ATTRIBUTE classe {Cat, Dog}
 
 @DATA
